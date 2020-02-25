@@ -1,0 +1,29 @@
+input {
+  udp {
+    port => "28777"
+  }
+
+  tcp {
+    port => "28777"
+
+  }
+}
+
+filter {
+    json {
+        source => "message"
+      }
+    grok {
+       match => [
+             "message" , "%{COMBINEDAPACHELOG}+%{GREEDYDATA:extra_fields}",
+             "message" , "%{COMMONAPACHELOG}+%{GREEDYDATA:extra_fields}"
+       ]
+       overwrite => [ "message" ]
+    }
+}
+
+output { 
+  newrelic {
+       license_key => "<YOUR_LICENSE_KEY>"
+    }
+}

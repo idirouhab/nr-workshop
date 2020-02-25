@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nr-nodejs-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nr-nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nr-nodejs-app
+    spec:
+      containers:
+      - name: nr-nodejs-app
+        image: idirouhab/nr-nodejs-app:latest
+        ports:
+        - containerPort: 3030
+        env:
+          - name: NEW_RELIC_LICENSE_KEY
+            value: "<YOUR_LICENSE_KEY>"
+          - name: LOGSTASH_HOST
+            value: "logstash"
+          - name: LOGSTASH_POST
+            value: "5044"
+        imagePullPolicy: Always

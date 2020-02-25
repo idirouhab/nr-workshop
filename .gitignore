@@ -1,0 +1,7 @@
+.idea/
+node_modules
+npm-debug.log
+.env
+.DS_Store
+newrelic_agent.log
+logstash/logstash.conf

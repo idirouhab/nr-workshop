@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nri-integration-cfg # aimed to be safely overridden by users
+  namespace: default
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nri-default-integration-cfg # integrations config provided by default
+  namespace: default
+data:
+  nri-kubernetes-config.yml: |
+    integration_name: com.newrelic.kubernetes
+    instances:
+      - name: nri-kubernetes
+        command: metrics
